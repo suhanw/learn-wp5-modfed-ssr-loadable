@@ -21,17 +21,14 @@ const renderer = async (req, res, next) => {
 	// You can also collect your "preload/prefetch" links
 	const linkTags = extractor.getLinkTags() // or extractor.getLinkElements();
 	// And you can even collect your style tags (if you use "mini-css-extract-plugin")
-	const styleTags = await extractor.getStyleTags() // or extractor.getStyleElements();
-
-	const cssString = await extractor.getCssString()
+	const styleTags = extractor.getStyleTags() // or extractor.getStyleElements();
 
 	console.log({
 		styleTags, 
-		cssString
 	})
 
-	const clientBundleScript = `<script src="http://localhost:8080/scripts/bundle.js"></script>`;
-	const clientBundleStyle = `<link rel="stylesheet" href="http://localhost:8080/styles/client_index_js.bundle.css">`;
+	// const clientBundleScript = `<script src="http://localhost:8080/scripts/bundle.js"></script>`;
+	// const clientBundleStyle = `<link rel="stylesheet" href="http://localhost:8080/styles/client_index_js.bundle.css">`;
 	const remoteBundleScript = `<script src="http://localhost:8081/scripts/remoteEntry.js"></script>`;
 
 	// res.send(`

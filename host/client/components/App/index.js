@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import style from './style.less';
+import style from './style';
 import TopNav from 'remote/top-nav';
 
 const App = () => {

@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import loadable from '@loadable/component';
 import style from './style';
-import TopNav from 'remote/top-nav';
-// const TopNav = loadable(() => import('remote/top-nav'), { ssr: true });
+// import Footer from '../Footer';
+const Footer = loadable(() => import('../Footer'));
+// import TopNav from 'remote/top-nav';
+const TopNav = loadable(() => import('remote/top-nav'), { ssr: false });
 
 const App = () => {
 	useEffect(() => {
@@ -12,7 +14,8 @@ const App = () => {
 	return (
 		<div className={style.app}>
 			<TopNav />
-			Hello World
+			Hello World from HOST
+			<Footer />
 		</div>
 	);
 }

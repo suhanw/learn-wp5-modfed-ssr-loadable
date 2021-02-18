@@ -18,7 +18,7 @@ const config = {
 	output: {
 		path: path.join(__dirname, './build/client'),
 		publicPath: `http://localhost:${port}/`, 
-		filename: `scripts/bundle.js`,
+		filename: `scripts/[name].js`,
 	},
 
 	devServer: { 
@@ -28,8 +28,7 @@ const config = {
 
 	plugins: [
 		new MiniCssExtractPlugin({ // extracts css from bundle
-			filename: `styles/bundle.css`,
-			chunkFilename: `styles/bundle.css`,
+			filename: `styles/[name].css`,
 		}),
 		new ModuleFederationPlugin({
 			name: 'host',

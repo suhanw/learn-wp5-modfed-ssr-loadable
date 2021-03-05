@@ -1,15 +1,30 @@
 import 'core-js';
 import 'regenerator-runtime';
-import express from 'express';
-import initMiddleware from "./middleware";
+import Hapi from '@hapi/hapi';
 
-const app = express();
-const port = 3000;
-
-const done = () => {
-	app.listen(port, () => {
-		console.log(`Server is listening on port: ${port}`);
+const init = async () => {
+	const server = Hapi.server({
+		port: 3000,
+		host: 'localhost',
 	});
+
+	server.route({
+		method: 'GET',
+		path: '/{path*}',
+		handler: async (request, h) => {
+			const renderThunk = require('./render-thunk').default;
+			const renderer = renderThunk();
+			return await renderer(request, h);
+		},
+	});
+
+	await server.start();
+	console.log('Server running on %s', server.info.uri);
 };
 
-initMiddleware(express, app, done);
+process.on('unhandledRejection', (err) => {
+	console.log(err);
+	process.exit(1);
+});
+
+init();

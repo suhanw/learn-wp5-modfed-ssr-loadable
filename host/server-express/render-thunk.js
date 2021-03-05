@@ -1,13 +1,13 @@
-const renderThunk = () => async (request, h) => {
+const renderThunk = () => async (req, res, next) => {
 	let renderer; 
 	try {
 		renderer = (await import('./renderer')).default;
 	} catch (error) {
 		console.error(error)
-		renderer = (request, h) => 'Error caught';
+		renderer = (req, res, next) => res.send('Error caught');
 	}
 
-	return renderer(request, h);
+	return renderer(req, res, next);
 };
 
 export default renderThunk;
